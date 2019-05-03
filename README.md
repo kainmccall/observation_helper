@@ -3,6 +3,8 @@ A group of methods and functions written to make analysis of data from AstroImag
 
 These classes and functions were developed while conduncting my senior Capstone Project for my undergraduate physics degree at Rochester Institute of Technology. My project was about variable stars, and I was using AstroImageJ to clean and photometer CCD images. These classes and methods can help to organize targets and files and quickly plot data from AstroImageJ files for students using AstroImageJ for similar projects.
 
+I am testing a link. API Documentation can be found [here](./docs/_build/html/api.html)
+
 ## WORK IN PROGRESS! MORE COMING SOON!
 
 ## Dependency
