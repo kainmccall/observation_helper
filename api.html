@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>The observation_helper API reference &#8212; observation_helper 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to observation_helper’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-observation_helper">
+<span id="the-observation-helper-api-reference"></span><h1>The observation_helper API reference<a class="headerlink" href="#module-observation_helper" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-observation_helper.observation_helper">
+<span id="the-observation-helper-module"></span><h2>The “observation_helper” Module<a class="headerlink" href="#module-observation_helper.observation_helper" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="observation_helper.observation_helper.AIJFile">
+<em class="property">class </em><code class="descclassname">observation_helper.observation_helper.</code><code class="descname">AIJFile</code><span class="sig-paren">(</span><em>filename</em>, <em>filter_type</em>, <em>target_star_dict</em>, <em>ref_star_dict</em>, <em>point_format=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a class of objects which represent the output text files from AstroImageJ. Each object must be created with properties encoded to tell the program what filter the data were taken in, which stars belong to which aperture, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – name of output text file</p></li>
+<li><p><strong>filter_type</strong> (<em>str</em>) – filter in which data were taken</p></li>
+<li><p><strong>target_star_dict</strong> (<em>dict{str:int}</em>) – dictionary containing the name of the target star in each target aperture (designated with a ‘T’ in the label by AstroImageJ) as keys, and the integer aperture number (i.e., 1 for ‘T1’, 5 for ‘T5’) as the corresponding value</p></li>
+<li><p><strong>ref_star_dict</strong> (<em>dict{str:</em><em>(</em><em>int</em><em>, </em><em>float</em><em>)</em><em>}</em>) – dictionary, similar to above, containing name of each reference star as key, and a tuple as value. Tuple should be of the format (aperture number, magnitude).</p></li>
+<li><p><strong>point_format</strong> (<em>str</em>) – matplotlib color/style for plotting anything from this file (e.g., “b.” or “k-“). Default is “b.”</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="observation_helper.observation_helper.AIJFile.clipFile">
+<code class="descname">clipFile</code><span class="sig-paren">(</span><em>ref_star</em>, <em>sigma</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.clipFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clips data points from file if the magnitude of ref_star is more that sigma standard deviations away from its mean magnitude. Actually creates a new .txt file in the same directory with the same name, with _clipped appended to the end and uses this new file for all following calculations, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ref_star</strong> (<em>str</em>) – name of the reference star whose magnitude to calculate and use to determine which data points should be clipped. MUST match name in ref_star_dict.</p></li>
+<li><p><strong>sigma</strong> (<em>int</em><em> or </em><em>float</em>) – limit on number of standard deviations away a value can be without being eliminated</p></li>
+</ul>
+</dd>
+</dl>
+<p>Kwargs:
+:param use_ref_stars: a list of reference star names (see <code class="docutils literal notranslate"><span class="pre">ref_star_dict</span></code>) to use for calculation of magnitude, if use of only some reference stars is desired
+:type use_ref_stars: list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.AIJFile.getColumn">
+<code class="descname">getColumn</code><span class="sig-paren">(</span><em>label</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.getColumn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all values from the column in the AstroImageJ file with the label label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>label</strong> (<em>str</em>) – label of the column whose values are returned</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>column in file with label <code class="docutils literal notranslate"><span class="pre">label</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.AIJFile.plotFile">
+<code class="descname">plotFile</code><span class="sig-paren">(</span><em>xLabel</em>, <em>yLabel</em>, <em>showPlot=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.plotFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a plot of column <code class="docutils literal notranslate"><span class="pre">yLabel</span></code> vs. column <code class="docutils literal notranslate"><span class="pre">xLabel</span></code>, where <code class="docutils literal notranslate"><span class="pre">xLabel</span></code> and <code class="docutils literal notranslate"><span class="pre">yLabel</span></code> are the labels of each column in the AstroImageJ output file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xLabel</strong> (<em>str</em>) – label of column in AstroImageJ output file whose data will be considered the x-values of plot</p></li>
+<li><p><strong>yLabel</strong> (<em>str</em>) – label of column in AstroImageJ output file whose data will be considered the y-values of plot</p></li>
+<li><p><strong>showPlot</strong> (<em>bool</em>) – determines whether to print plot to console (default is True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>column in file with label <code class="docutils literal notranslate"><span class="pre">xLabel</span></code>, column in file with label <code class="docutils literal notranslate"><span class="pre">yLabel</span></code></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray, ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.AIJFile.unclipFile">
+<code class="descname">unclipFile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.unclipFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Un-clips the data file. In reality, goes back to using old, untouched file for calculations, etc.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="observation_helper.observation_helper.OtherDataFile">
+<em class="property">class </em><code class="descclassname">observation_helper.observation_helper.</code><code class="descname">OtherDataFile</code><span class="sig-paren">(</span><em>filename</em>, <em>filter_type</em>, <em>column_positions</em>, <em>point_format=None</em>, <em>has_header=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.OtherDataFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class of objects which represent data files not from AstroImageJ. These could be, for instance, .txt files of data from ASAS-SN or CSS, etc. Text files must contain at least columns for HJD, magnitude, and error in magnitude.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – name of the file which contains the data</p></li>
+<li><p><strong>filter_type</strong> (<em>str</em>) – filter in which data were taken</p></li>
+<li><p><strong>column_positions</strong> – list of zero-indexed columns corresponding to HJD, magnitude, and error in magnitude, in that order. (e.g. [0, 2, 3] would mean that HJD data is in first column, magnitude is in the third column, and error in magnitude is in 4th column)</p></li>
+<li><p><strong>point_format</strong> (<em>str</em>) – matplotlib color/style for plotting this file (e.g., “b.” or “k-“). Default is “b.”</p></li>
+<li><p><strong>has_header</strong> (<em>int</em>) – number of rows to ignore in beginning of file (in case of headers, column labels, etc.). Default is 0</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="observation_helper.observation_helper.Target">
+<em class="property">class </em><code class="descclassname">observation_helper.observation_helper.</code><code class="descname">Target</code><span class="sig-paren">(</span><em>name</em>, <em>coords</em>, <em>given_period</em>, <em>phase0_hjd=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class of objects which represent target stars. Each has properties like a name, coordinates, a period, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – name of the target</p></li>
+<li><p><strong>coords</strong> (<em>tuple</em><em> (</em><em>float</em><em>, </em><em>float</em><em>)</em>) – tuple containing the J2000 RA and Dec of the target (RA, Dec), in decimal format (NOT sexagesimal)</p></li>
+<li><p><strong>given_period</strong> (<em>float</em>) – period of target to use as default, initially (can be changed– see <a class="reference internal" href="#observation_helper.observation_helper.Target.calcPeriod" title="observation_helper.observation_helper.Target.calcPeriod"><code class="xref py py-func docutils literal notranslate"><span class="pre">calcPeriod()</span></code></a>, <a class="reference internal" href="#observation_helper.observation_helper.Target.addPeriod" title="observation_helper.observation_helper.Target.addPeriod"><code class="xref py py-func docutils literal notranslate"><span class="pre">addPeriod()</span></code></a>, and <a class="reference internal" href="#observation_helper.observation_helper.Target.setPeriod" title="observation_helper.observation_helper.Target.setPeriod"><code class="xref py py-func docutils literal notranslate"><span class="pre">setPeriod()</span></code></a>)</p></li>
+<li><p><strong>phase0_hjd</strong> (<em>float</em>) – when phasing, this will be the HJD with the initial phase, or phase=0 (default is 0)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.addData">
+<code class="descname">addData</code><span class="sig-paren">(</span><em>file</em>, <em>comparison_star</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.addData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an AIJFile object or an OtherDataFile object to the target object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<a class="reference internal" href="#observation_helper.observation_helper.AIJFile" title="observation_helper.observation_helper.AIJFile"><em>AIJFile</em></a><em> or </em><a class="reference internal" href="#observation_helper.observation_helper.OtherDataFile" title="observation_helper.observation_helper.OtherDataFile"><em>OtherDataFile</em></a>) – File to be added to the target</p></li>
+<li><p><strong>comparison_star</strong> (<em>str</em>) – name of the comparison star to use to calculate characteristic error</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.addPeriod">
+<code class="descname">addPeriod</code><span class="sig-paren">(</span><em>label</em>, <em>period</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.addPeriod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a period to the list of periods for Target (does NOT set this period as the default period. See <a class="reference internal" href="#observation_helper.observation_helper.Target.setPeriod" title="observation_helper.observation_helper.Target.setPeriod"><code class="xref py py-func docutils literal notranslate"><span class="pre">setPeriod()</span></code></a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<em>str</em>) – label of period to be added</p></li>
+<li><p><strong>period</strong> (<em>float</em>) – value of period to be added</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.calcPeriod">
+<code class="descname">calcPeriod</code><span class="sig-paren">(</span><em>filter_type</em>, <em>period_range=None</em>, <em>graphP=None</em>, <em>printP=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.calcPeriod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates a period for the target based upon data added in filter_type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter_type</strong> (<em>str</em>) – filter in which data to be used for calculation of period was taken</p></li>
+<li><p><strong>period_range</strong> (<em>tuple</em>) – renge, in days, in which to search for periods</p></li>
+<li><p><strong>graphP</strong> (<em>bool</em>) – determines whether or not to print periodogram to the console. Default is False.</p></li>
+<li><p><strong>printP</strong> (<em>bool</em>) – determines whether or not to print the value of the best period to the console. Default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>calcP – calculated period</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.getColorFit">
+<code class="descname">getColorFit</code><span class="sig-paren">(</span><em>filter1</em>, <em>filter2</em>, <em>forceN1=None</em>, <em>forceN2=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getColorFit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits a Fourier series each to data in filter1 and filter2, then uses these fits to find color index (filter1 - filter2) over phase for a Target.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter1</strong> (<em>str</em>) – filter in which data to be fitted was taken (e.g. V in V - R)</p></li>
+<li><p><strong>filter2</strong> (<em>str</em>) – filter in which data to be fitted was taken (e.g. R in V - R)</p></li>
+<li><p><strong>forceN1</strong> (<em>int</em>) – highest N out to which to calculate fit for filter 1 (see definition of Fourier series). By default, uses unit-lag auto-correlation to determine best N for fit, but this parameter overrides the process</p></li>
+<li><p><strong>forceN2</strong> (<em>int</em>) – highest N out to which to calculate fit for filter 2 (see definition of Fourier series). By default, uses unit-lag auto-correlation to determine best N for fit, but this parameter overrides the process</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>xPhase, color– lists of the phases and color index at each of the phases, respectively</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list, list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.getColorTemperature">
+<code class="descname">getColorTemperature</code><span class="sig-paren">(</span><em>filter1</em>, <em>filter2</em>, <em>tempModelFit</em>, <em>forceN1=None</em>, <em>forceN2=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getColorTemperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses <a class="reference internal" href="#observation_helper.observation_helper.Target.getColorFit" title="observation_helper.observation_helper.Target.getColorFit"><code class="xref py py-func docutils literal notranslate"><span class="pre">getColorFit()</span></code></a> and a quadratic model relating temperature to color index to calculate the color temperature of the Target.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter1</strong> (<em>str</em>) – filter in which data to be fitted was taken (e.g. V in V - R)</p></li>
+<li><p><strong>filter2</strong> (<em>str</em>) – filter in which data to be fitted was taken (e.g. R in V - R)</p></li>
+<li><p><strong>tempModelFit</strong> (<em>tuple of length 3</em>) – (a, b, c) where color temperature = a + b(filter1 - filter2) + c(filter1 - filter2)^2</p></li>
+<li><p><strong>forceN1</strong> (<em>int</em>) – highest N out to which to calculate fit for filter 1 (see definition of Fourier series). By default, uses unit-lag auto-correlation to determine best N for fit, but this parameter overrides the process</p></li>
+<li><p><strong>forceN2</strong> (<em>int</em>) – highest N out to which to calculate fit for filter 2 (see definition of Fourier series). By default, uses unit-lag auto-correlation to determine best N for fit, but this parameter overrides the process</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>xPhase, temp – lists of the phases and the calculated temperature at each of those phases, respectively</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list, list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.getFluxData">
+<code class="descname">getFluxData</code><span class="sig-paren">(</span><em>filter_type</em>, <em>return_1D_lists=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getFluxData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the relative flux of the target star</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter_type</strong> (<em>str</em>) – Filter in which data to be returned was taken</p></li>
+<li><p><strong>return_1D_lists</strong> (<em>bool</em>) – determines whether to return lists of equal length with the data from all files combined into the same list, or whether to return lists of lists, where each returned list contains lists of values which correspond to a particular file (default is False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HJD, flux, dFlux, pltColor</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list, list, list, list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.getFourierFit">
+<code class="descname">getFourierFit</code><span class="sig-paren">(</span><em>filter_type</em>, <em>lineFmt=None</em>, <em>showPlot=None</em>, <em>forceN=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getFourierFit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fits a Fourier series to data added to target in filter_type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter_type</strong> (<em>str</em>) – filter in which data to be fitted was taken</p></li>
+<li><p><strong>lineFmt</strong> (<em>str</em>) – matplotlib parameter for style and color of line indicating Fourier Fit. Default is “k-“</p></li>
+<li><p><strong>showPlot</strong> (<em>bool</em>) – determines whether or not to show the graph of the resulting fit.</p></li>
+<li><p><strong>forceN</strong> (<em>int</em>) – highest N out to which to calculate fit (see definition of Fourier series). By default, uses unit-lag auto-correlation to determine best N for fit, but this parameter overries that process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>popt, pcov (fitted parameters and their covariance– see curve_fit in SciPy package)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array, 2d array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.getMagData">
+<code class="descname">getMagData</code><span class="sig-paren">(</span><em>filter_type</em>, <em>return_1D_lists=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getMagData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates magnitude of Target object for all data points added and returns HJD, magnitude, error in magnitude, and plot color</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter_type</strong> (<em>str</em>) – Filter in which data to be returned was taken</p></li>
+<li><p><strong>return_1D_lists</strong> (<em>bool</em>) – determines whether to return lists of equal length with the data from all files combined into the same list, or whether to return lists of lists, where each returned list contains lists of values which correspond to a particular file (default is False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>HJD, mag, dMag, pltColor</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list, list, list, list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.makeLightCurve">
+<code class="descname">makeLightCurve</code><span class="sig-paren">(</span><em>filter_type</em>, <em>plotHJD=None</em>, <em>plotFlux=None</em>, <em>runShowPlot=None</em>, <em>bar_position=None</em>, <em>set_title=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.makeLightCurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a light curve from target data added in filter_type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter_type</strong> (<em>str</em>) – filter in which data to be plotted was taken</p></li>
+<li><p><strong>plotHJD</strong> (<em>bool</em>) – indicates whether x-axis should be HJD or phase. Default is phase (False)</p></li>
+<li><p><strong>plotFlux</strong> (<em>bool</em>) – indicates whether y-axis should be magnitude or flux. Default is magnitude (False)</p></li>
+<li><p><strong>runShowPlot</strong> (<em>bool</em>) – indicates whether to run show() command at end of sequence– if False, can add/edit plot (i.e., plot additional items on light curve, like a fit line, etc.). Default is True</p></li>
+<li><p><strong>bar_position</strong> (<em>float</em>) – determines the y-axis position of the characteristic error bars. Calculates automatically by default, but to set manually, this argument can be used.</p></li>
+<li><p><strong>set_title</strong> (<em>str</em>) – title to be used for light curve. Default is the target name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.plotFiles">
+<code class="descname">plotFiles</code><span class="sig-paren">(</span><em>xLabel</em>, <em>yLabel</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.plotFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots column with label <code class="docutils literal notranslate"><span class="pre">xLabel</span></code> vs. column with label <code class="docutils literal notranslate"><span class="pre">yLabel</span></code> for files added to Target.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xLabel</strong> (<em>str</em>) – label of column in AstroImageJ output files whose data will be considered the x-values of plot</p></li>
+<li><p><strong>yLabel</strong> (<em>str</em>) – label of column in AstroImageJ output files whose data will be considered the y-values of plot</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.setPeriod">
+<code class="descname">setPeriod</code><span class="sig-paren">(</span><em>period_label</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.setPeriod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the default period to the period with label <code class="docutils literal notranslate"><span class="pre">period_label</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>period_label</strong> (<em>str</em>) – label of period to be set as default</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="observation_helper.observation_helper.Target.timeOnTarget">
+<code class="descname">timeOnTarget</code><span class="sig-paren">(</span><em>time_threshold</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.timeOnTarget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints a summary of time spent observing Target based upon files added.</p>
+<p>[note that this WILL NOT work for things like ASAS-SN, since images are taken every few days, unless threshold is set to be larger than the time difference between images being taken]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time_threshold</strong> (<em>float</em>) – value (in days) of how long of a break between images being taken to not include it in the calculation of time on target.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="kwargs">
+<h2>kwargs<a class="headerlink" href="#kwargs" title="Permalink to this headline">¶</a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">use_files</dt>
+<dd class="field-odd"><p>(list containing AIJFile and/or OtherDataFile objects): list containing which files to use for calculations, plots, etc., if not all files should be included.</p>
+</dd>
+<dt class="field-even">use_ref_stars</dt>
+<dd class="field-even"><p>(list): a list of reference star names (see <code class="docutils literal notranslate"><span class="pre">ref_star_dict</span></code>) to use for calculation of magnitude, if use of only some reference stars is desired</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">observation_helper</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The observation_helper API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-observation_helper.observation_helper">The “observation_helper” Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kwargs">kwargs</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to observation_helper’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Kain McCall.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
