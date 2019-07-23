@@ -10,6 +10,7 @@ Welcome to observation_helper's documentation!
    :maxdepth: 2
    :caption: Contents:
    
+   tutorial
    api
 
 

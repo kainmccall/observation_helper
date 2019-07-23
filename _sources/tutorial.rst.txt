@@ -1,0 +1,14 @@
+observation_helper Tutorial
+===========================
+
+Intro sentences for tutorial. This says what it is.
+
+Installation
+------------
+
+Here's how to install it.
+
+The Basics
+----------
+
+The observation_helper module aims to make the organization of an observational astronomy project easier by focusing on two types of objects: files and targets. Files refer to the .txt files full of data about a particular target. A target is a star or other object which was imaged and is now being studied. 
