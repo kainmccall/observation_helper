@@ -16,7 +16,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Welcome to observation_helper’s documentation!" href="index.html" /> 
+    <link rel="prev" title="observation_helper Tutorial" href="tutorial.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,7 +28,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to observation_helper’s documentation!"
+          <a href="tutorial.html" title="observation_helper Tutorial"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">observation_helper 0.0.1 documentation</a> &#187;</li> 
       </ul>
@@ -44,7 +44,7 @@
 <span id="the-observation-helper-module"></span><h2>The “observation_helper” Module<a class="headerlink" href="#module-observation_helper.observation_helper" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="observation_helper.observation_helper.AIJFile">
-<em class="property">class </em><code class="descclassname">observation_helper.observation_helper.</code><code class="descname">AIJFile</code><span class="sig-paren">(</span><em>filename</em>, <em>filter_type</em>, <em>target_star_dict</em>, <em>ref_star_dict</em>, <em>point_format=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">observation_helper.observation_helper.</code><code class="sig-name descname">AIJFile</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">filter_type</em>, <em class="sig-param">target_star_dict</em>, <em class="sig-param">ref_star_dict</em>, <em class="sig-param">point_format=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is a class of objects which represent the output text files from AstroImageJ. Each object must be created with properties encoded to tell the program what filter the data were taken in, which stars belong to which aperture, etc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -59,7 +59,7 @@
 </dl>
 <dl class="method">
 <dt id="observation_helper.observation_helper.AIJFile.clipFile">
-<code class="descname">clipFile</code><span class="sig-paren">(</span><em>ref_star</em>, <em>sigma</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.clipFile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">clipFile</code><span class="sig-paren">(</span><em class="sig-param">ref_star</em>, <em class="sig-param">sigma</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.clipFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Clips data points from file if the magnitude of ref_star is more that sigma standard deviations away from its mean magnitude. Actually creates a new .txt file in the same directory with the same name, with _clipped appended to the end and uses this new file for all following calculations, etc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -76,7 +76,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.AIJFile.getColumn">
-<code class="descname">getColumn</code><span class="sig-paren">(</span><em>label</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.getColumn" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getColumn</code><span class="sig-paren">(</span><em class="sig-param">label</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.getColumn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns all values from the column in the AstroImageJ file with the label label.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -93,7 +93,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.AIJFile.plotFile">
-<code class="descname">plotFile</code><span class="sig-paren">(</span><em>xLabel</em>, <em>yLabel</em>, <em>showPlot=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.plotFile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plotFile</code><span class="sig-paren">(</span><em class="sig-param">xLabel</em>, <em class="sig-param">yLabel</em>, <em class="sig-param">showPlot=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.plotFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a plot of column <code class="docutils literal notranslate"><span class="pre">yLabel</span></code> vs. column <code class="docutils literal notranslate"><span class="pre">xLabel</span></code>, where <code class="docutils literal notranslate"><span class="pre">xLabel</span></code> and <code class="docutils literal notranslate"><span class="pre">yLabel</span></code> are the labels of each column in the AstroImageJ output file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -114,7 +114,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.AIJFile.unclipFile">
-<code class="descname">unclipFile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.unclipFile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">unclipFile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.AIJFile.unclipFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Un-clips the data file. In reality, goes back to using old, untouched file for calculations, etc.</p>
 </dd></dl>
 
@@ -122,7 +122,7 @@
 
 <dl class="class">
 <dt id="observation_helper.observation_helper.OtherDataFile">
-<em class="property">class </em><code class="descclassname">observation_helper.observation_helper.</code><code class="descname">OtherDataFile</code><span class="sig-paren">(</span><em>filename</em>, <em>filter_type</em>, <em>column_positions</em>, <em>point_format=None</em>, <em>has_header=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.OtherDataFile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">observation_helper.observation_helper.</code><code class="sig-name descname">OtherDataFile</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">filter_type</em>, <em class="sig-param">column_positions</em>, <em class="sig-param">point_format=None</em>, <em class="sig-param">has_header=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.OtherDataFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class of objects which represent data files not from AstroImageJ. These could be, for instance, .txt files of data from ASAS-SN or CSS, etc. Text files must contain at least columns for HJD, magnitude, and error in magnitude.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -139,7 +139,7 @@
 
 <dl class="class">
 <dt id="observation_helper.observation_helper.Target">
-<em class="property">class </em><code class="descclassname">observation_helper.observation_helper.</code><code class="descname">Target</code><span class="sig-paren">(</span><em>name</em>, <em>coords</em>, <em>given_period</em>, <em>phase0_hjd=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">observation_helper.observation_helper.</code><code class="sig-name descname">Target</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">coords</em>, <em class="sig-param">given_period</em>, <em class="sig-param">phase0_hjd=None</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class of objects which represent target stars. Each has properties like a name, coordinates, a period, etc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -153,7 +153,7 @@
 </dl>
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.addData">
-<code class="descname">addData</code><span class="sig-paren">(</span><em>file</em>, <em>comparison_star</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.addData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addData</code><span class="sig-paren">(</span><em class="sig-param">file</em>, <em class="sig-param">comparison_star</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.addData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds an AIJFile object or an OtherDataFile object to the target object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -167,7 +167,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.addPeriod">
-<code class="descname">addPeriod</code><span class="sig-paren">(</span><em>label</em>, <em>period</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.addPeriod" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addPeriod</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">period</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.addPeriod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a period to the list of periods for Target (does NOT set this period as the default period. See <a class="reference internal" href="#observation_helper.observation_helper.Target.setPeriod" title="observation_helper.observation_helper.Target.setPeriod"><code class="xref py py-func docutils literal notranslate"><span class="pre">setPeriod()</span></code></a>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -181,7 +181,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.calcPeriod">
-<code class="descname">calcPeriod</code><span class="sig-paren">(</span><em>filter_type</em>, <em>period_range=None</em>, <em>graphP=None</em>, <em>printP=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.calcPeriod" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calcPeriod</code><span class="sig-paren">(</span><em class="sig-param">filter_type</em>, <em class="sig-param">period_range=None</em>, <em class="sig-param">graphP=None</em>, <em class="sig-param">printP=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.calcPeriod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates a period for the target based upon data added in filter_type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -203,7 +203,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.getColorFit">
-<code class="descname">getColorFit</code><span class="sig-paren">(</span><em>filter1</em>, <em>filter2</em>, <em>forceN1=None</em>, <em>forceN2=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getColorFit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getColorFit</code><span class="sig-paren">(</span><em class="sig-param">filter1</em>, <em class="sig-param">filter2</em>, <em class="sig-param">forceN1=None</em>, <em class="sig-param">forceN2=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getColorFit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fits a Fourier series each to data in filter1 and filter2, then uses these fits to find color index (filter1 - filter2) over phase for a Target.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -225,7 +225,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.getColorTemperature">
-<code class="descname">getColorTemperature</code><span class="sig-paren">(</span><em>filter1</em>, <em>filter2</em>, <em>tempModelFit</em>, <em>forceN1=None</em>, <em>forceN2=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getColorTemperature" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getColorTemperature</code><span class="sig-paren">(</span><em class="sig-param">filter1</em>, <em class="sig-param">filter2</em>, <em class="sig-param">tempModelFit</em>, <em class="sig-param">forceN1=None</em>, <em class="sig-param">forceN2=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getColorTemperature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses <a class="reference internal" href="#observation_helper.observation_helper.Target.getColorFit" title="observation_helper.observation_helper.Target.getColorFit"><code class="xref py py-func docutils literal notranslate"><span class="pre">getColorFit()</span></code></a> and a quadratic model relating temperature to color index to calculate the color temperature of the Target.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -248,7 +248,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.getFluxData">
-<code class="descname">getFluxData</code><span class="sig-paren">(</span><em>filter_type</em>, <em>return_1D_lists=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getFluxData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getFluxData</code><span class="sig-paren">(</span><em class="sig-param">filter_type</em>, <em class="sig-param">return_1D_lists=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getFluxData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the relative flux of the target star</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -268,7 +268,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.getFourierFit">
-<code class="descname">getFourierFit</code><span class="sig-paren">(</span><em>filter_type</em>, <em>lineFmt=None</em>, <em>showPlot=None</em>, <em>forceN=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getFourierFit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getFourierFit</code><span class="sig-paren">(</span><em class="sig-param">filter_type</em>, <em class="sig-param">lineFmt=None</em>, <em class="sig-param">showPlot=None</em>, <em class="sig-param">forceN=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getFourierFit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fits a Fourier series to data added to target in filter_type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -290,7 +290,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.getMagData">
-<code class="descname">getMagData</code><span class="sig-paren">(</span><em>filter_type</em>, <em>return_1D_lists=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getMagData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getMagData</code><span class="sig-paren">(</span><em class="sig-param">filter_type</em>, <em class="sig-param">return_1D_lists=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.getMagData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates magnitude of Target object for all data points added and returns HJD, magnitude, error in magnitude, and plot color</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -310,7 +310,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.makeLightCurve">
-<code class="descname">makeLightCurve</code><span class="sig-paren">(</span><em>filter_type</em>, <em>plotHJD=None</em>, <em>plotFlux=None</em>, <em>runShowPlot=None</em>, <em>bar_position=None</em>, <em>set_title=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.makeLightCurve" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">makeLightCurve</code><span class="sig-paren">(</span><em class="sig-param">filter_type</em>, <em class="sig-param">plotHJD=None</em>, <em class="sig-param">plotFlux=None</em>, <em class="sig-param">runShowPlot=None</em>, <em class="sig-param">bar_position=None</em>, <em class="sig-param">set_title=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.makeLightCurve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a light curve from target data added in filter_type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -328,7 +328,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.plotFiles">
-<code class="descname">plotFiles</code><span class="sig-paren">(</span><em>xLabel</em>, <em>yLabel</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.plotFiles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plotFiles</code><span class="sig-paren">(</span><em class="sig-param">xLabel</em>, <em class="sig-param">yLabel</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.plotFiles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots column with label <code class="docutils literal notranslate"><span class="pre">xLabel</span></code> vs. column with label <code class="docutils literal notranslate"><span class="pre">yLabel</span></code> for files added to Target.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -342,7 +342,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.setPeriod">
-<code class="descname">setPeriod</code><span class="sig-paren">(</span><em>period_label</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.setPeriod" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setPeriod</code><span class="sig-paren">(</span><em class="sig-param">period_label</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.setPeriod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the default period to the period with label <code class="docutils literal notranslate"><span class="pre">period_label</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -353,7 +353,7 @@
 
 <dl class="method">
 <dt id="observation_helper.observation_helper.Target.timeOnTarget">
-<code class="descname">timeOnTarget</code><span class="sig-paren">(</span><em>time_threshold</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.timeOnTarget" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">timeOnTarget</code><span class="sig-paren">(</span><em class="sig-param">time_threshold</em><span class="sig-paren">)</span><a class="headerlink" href="#observation_helper.observation_helper.Target.timeOnTarget" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints a summary of time spent observing Target based upon files added.</p>
 <p>[note that this WILL NOT work for things like ASAS-SN, since images are taken every few days, unless threshold is set to be larger than the time difference between images being taken]</p>
 <dl class="field-list simple">
@@ -394,14 +394,14 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to observation_helper’s documentation!"
+          <a href="tutorial.html" title="observation_helper Tutorial"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">observation_helper 0.0.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Kain McCall.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
     </div>
   </body>
 </html>

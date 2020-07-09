@@ -1,14 +1,26 @@
 observation_helper Tutorial
 ===========================
 
-Intro sentences for tutorial. This says what it is.
+Here's a handy guide for your first steps with observation_helper.
 
-Installation
-------------
+Getting Started
+---------------
 
-Here's how to install it.
+In order to use observation_helper, you will need to have the following packages installed:
+matplotlib
+numpy
+scipy
+gatspy
+PyAstronomy
+
+The tutorial file also uses os.path to read in some example data from included files. To get started, just open tutorial.py in your preferred editor to read the comments and follow along in the file!
 
 The Basics
-----------
+------------
 
 The observation_helper module aims to make the organization of an observational astronomy project easier by focusing on two types of objects: files and targets. Files refer to the .txt files full of data about a particular target. A target is a star or other object which was imaged and is now being studied. 
+
+tutorial.py
+------------
+
+This file is a nice starting point for seeing how observation_helper works. Start by opening and running this file. The comments in the tutorial.py file serve as a tutorial for how to use observation_helper. Further information and detail can be gained from reading the API documentation.

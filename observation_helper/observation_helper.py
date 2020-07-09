@@ -8,8 +8,6 @@ from scipy.optimize import curve_fit
 from gatspy.periodic import LombScargleFast
 from PyAstronomy import pyasl
 
-#from utils import calcMag, calcFlux, getCharacteristicError, JD_to_HJD, getCol, phaseData, getClippedNightFile, getClippingList, fourier, fourierFit, getPeriod, fluxFromMag, vertexParabolaFunc, parabolaFit
-
 class AIJFile:
     """This is a class of objects which represent the output text files from AstroImageJ. Each object must be created with properties encoded to tell the program what filter the data were taken in, which stars belong to which aperture, etc.
     
@@ -545,7 +543,8 @@ class Target:
         HJD, Mag, dMag, pltColor, isCharError = self.getMagData(filter_type, return_1D_lists=True, **kwargs)
         phase = phaseData(HJD, self.period, hjd_offset=self.phase_hjd)
         labs = ("Phase", str(filter_type) + " Mag")
-        popt, pcov = fourierFit(phase, Mag, dMag, plot_title=self.name, plot_labels=labs, forceN=forceN)
+        #popt, pcov = fourierFit(phase, Mag, dMag, plot_title=self.name, plot_labels=labs, forceN=forceN)
+        popt, pcov = fourierFit(phase, Mag, dMag, forceN=forceN)
         if showPlot:
             self.makeLightCurve(filter_type, runShowPlot=False, **kwargs)
             xAxis = np.linspace(0, 1, 100)
